@@ -1,0 +1,987 @@
+<html>
+<html>
+<header><title>Traffic simulator - Config mode</title></header>
+<body bgcolor="#000000" text="#7FFF00" onload="reset()">
+<p>Cellular Automata by Marcelo Zamith</p>
+<p>Universidade Federal Rural do Rio de Janeiro - Departamento de Ci&#234;ncia da Computa&#231;&#227;o</p>
+
+<div id="Models">
+    <!-- Model setup -->
+    <h1>Models:</h1>    
+
+    <table border="1"  width="75%">
+    <tr>
+    <th scope="col">Model type:</th> 
+    <td> 
+       <select style="color: #7FFF00; background-color: #333333;" id="lstModels">
+         <option value="T-UFRRJ">T-UFRRJ</option>
+         <option value="T-UFRRJ-ML-SYM">T-UFRRJ-ML-SYM</option>
+         
+         
+         <option value="NASH">NASH</option>
+       </select>
+    </td>
+    <th scope="col">Speed limit (c/s):</th> 
+    <td>  <input style="color: #7FFF00; background-color: #333333;" type="text" id="txtSpeedLimit" value="25"> </td>
+    </tr>
+
+
+    </table>
+</div>
+
+<div id="Lattice">
+    <!-- Lattice setup -->
+    <h1>Lattice:</h1>    
+
+    <table border="1"  width="75%">
+    <tr>
+    <th scope="col">Cell X:</th> 
+    <td> <input style="color: #7FFF00; background-color: #333333;" type="text" id="txtCellX" value="1500"> </td>
+    <th scope="col">Cell size (m):</th> 
+    <td>  <input style="color: #7FFF00; background-color: #333333;" type="text" id="txtCellSize" value="1.5"> </td>
+    </tr>
+
+    <tr>
+    <th scope="col">Cell Y:</th> 
+    <td> <input style="color: #7FFF00; background-color: #333333;"type="text" id="txtCellY" value="1"> </td>
+    <th scope="col">Default cell size (m):</th> 
+    <td>  <input style="color: #7FFF00; background-color: #333333;" type="text"  id="txtDefaultCellSize" value="7.5"> </td>
+    </tr>
+    </table>
+</div>
+
+    
+<div id="logFiles">
+    <!-- log ssetup -->
+    <h1>Log files:</h1>
+    <table border="1" width="75%">
+    <tr>
+      <th scope="col" colspan="3">Statistic file name:</th>
+      <td> <input style="color: #7FFF00; background-color: #333333;" type="text" id="txtLogFileName" value="Default.txt" maxlength="64" size="64">  </td>
+    <tr>
+      <th scope="col" colspan="3">Log file name:</th>
+      <td> <input style="color: #7FFF00; background-color: #333333;" type="text" id="txtSpaceTimeFileName" value="Default.log" maxlength="64" size="64">  </td>
+    </tr>
+    </table>
+
+    
+</div>
+<div id="SimulationParameters">
+    <!-- Simulation parameters ssetup -->
+    <h1>Simulation parameters:</h1>
+    <table border="1" width="75%">
+      <tr>
+        <th scope="col" colspan="3">Simulation time:</th>
+        <th scope="col" colspan="3">Discard time:</th>
+        <th scope="col" colspan="3">Statistic time:</th>
+      </tr>
+      <tr>
+        <td>HH:&nbsp;<input style="color: #7FFF00; background-color: #333333;" type="text" id="txtSTH" value="10" maxlength="2" size="2" ></td>
+            <td>MM:&nbsp;<input style="color: #7FFF00; background-color: #333333;" type="text" id="txtSTM" value="00"  maxlength="2" size="2"></td>
+                 <td>SS:&nbsp;<input style="color: #7FFF00; background-color: #333333;" type="text" id="txtSTS" value="00"  maxlength="2" size="2"></td>
+        <td>HH:&nbsp;<input style="color: #7FFF00; background-color: #333333;" type="text" id="txtDTH" value="01" maxlength="2" size="2"></td>
+            <td>MM:&nbsp;<input style="color: #7FFF00; background-color: #333333;" type="text" id="txtDTM" value="00"  maxlength="2" size="2"></td>
+                <td>SS:&nbsp;<input style="color: #7FFF00; background-color: #333333;" type="text" id="txtDTS" value="00"  maxlength="2" size="2"></td>
+        <td>HH:&nbsp;<input style="color: #7FFF00; background-color: #333333;" type="text" id="txtSTTH" value="00" maxlength="2" size="2"></td>
+            <td>MM:&nbsp;<input style="color: #7FFF00; background-color: #333333;" type="text" id="txtSTTM" value="02"  maxlength="2" size="2"></td>
+                <td>SS:&nbsp;<input style="color: #7FFF00; background-color: #333333;" type="text" id="txtSTTS" value="00"  maxlength="2" size="2"></td>
+
+
+      </tr>
+    </table>
+
+    <table border="1" width="75%">
+      <tr>
+        <th scope="col" colspan="2">Initial density:</th>
+        <th scope="col" colspan="2">Delta density:</th>
+        <th scope="col" colspan="2">Final density:</th>
+      </tr>
+      <tr>
+        <td> <input style="color: #7FFF00; background-color: #333333;" type="text" id="txtInitDensity-percent" value="0.01"  maxlength="7" size="7">&nbsp;%</td>
+            <td><input style="color: #7FFF00; background-color: #333333;" type="text" id="txtInitDensity-absolut" value="00" maxlength="15" size="15" readonly="true">&nbsp;cells</td>
+        <td> <input style="color: #7FFF00; background-color: #333333;" type="text" id="txtDeltaDensity-percent" value="0.001"  maxlength="7" size="7">&nbsp;%</td>
+            <td> <input style="color: #7FFF00; background-color: #333333;" type="text" id="txtDeltaDensity-absolut" value="00" maxlength="15" size="15" readonly="true">&nbsp;cells</td>
+       <td> <input style="color: #7FFF00; background-color: #333333;" type="text" id="txtFinalDensity-percent" value="0.95"  maxlength="7" size="7">&nbsp;%</td>
+            <td> <input style="color: #7FFF00; backgtxtDefaultCellSizeround-color: #333333;" type="text" id="txtFinalDensity-absolut" value="00" maxlength="15" size="15" readonly="false">&nbsp;cells</td>
+
+
+      </tr>
+    </table>
+</div>
+<br/>
+<div id="buttonsController">
+    <input style="color: #7FFF00; background-color: #333333;" onclick="onBtnDefault()" 	type="button" id="btnDefault" value="Default">
+        <input style="color: #7FFF00; background-color: #333333;" onclick="onBtnVerify()" 	type="button" id="btnVerify" value="Verify">
+        <input style="color: #7FFF00; background-color: #333333;" onclick="onBtnDownload()" 	type="button" id="btnDownload" value="Download">
+
+        <input style="color: #7FFF00; background-color: #333333;" onclick="onBtnUpload()" 	type="button" id="btnUpload" value="Upload">
+
+        <input style="opacity:1;background-color: #333333;"  	type="file" id="btnFile" >
+
+
+    <!--
+        <input style="color: #7FFF00; background-color: #333333;"  	type="button" id="btnDefault" value="Add">
+        <input style="color: #7FFF00; background-color: #333333;"  	type="button" id="btnDefault" value="Del">
+        -->
+</div>
+<br/>
+<br/>
+<div id="divBehaviors">
+    <h1>Driver style:</h1>
+    <table id="tblBehaviors" border="1" width="75%">
+        <tr>
+            <th scope="col">Behavior </th>
+            <th scope="col" colspan="2">Beta(A,B) - Acc.</th>
+            <th scope="col" colspan="2">Beta(A,B) - Dist.</th>
+            <th scope="col">Curve</th>
+            <th scope="col">Headway (s)</th>
+            <th scope="col">Safe dist. (c)</th>
+            <th scope="col">% Occ.</th>
+            <th scope="col">Size (c)</th>
+            <th scope="col">Occ. (c)</th>
+            <th scope="col">V. Max. (c/s)</th>
+            <th scope="col">Delta V</th>
+            <th scope="col">P. left</th>
+            <th scope="col">P. right</th>
+            <th scope="col"  colspan="2">Driver log</th>
+            <th scope="col"  colspan="2">Add/del new behaviors</th>
+        </tr>
+        <tr>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=12 type="text" id="txtBehavior" value="unknown"/></td>
+            
+				<td><input style="color: #7FFF00; background-color: #333333;" size=2 type="text" id="txtBetaAacc" value="4"/></td>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=2 type="text" id="txtBetaBacc" value="2"/></td>            
+ 
+ 				<td><input  style="color: #7FFF00; background-color: #333333;" size=2 type="text" id="txtBetaAdst" value="4"/></td>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=2 type="text" id="txtBetaBdst" value="2"/></td>            
+
+				<td><input style="color: #7FFF00; background-color: #333333;" type="button" id="plotCurve" value="Plot" onclick="drawCurve(this)"/></td>            
+            
+            <td><input style="color: #7FFF00; background-color: #333333;" size=2 type="text" id="txtHeadway" value="6"/></td>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=2 type="text" id="txtSafeDist" value="3"/></td>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=4 type="text" id="txtPercentOccu" value="1.00"/></td>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=4 type="text" id="txtSize" value="5"/></td>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=4 type="text" id="txtAbsoluteOcc" value="" readonly="true" /></td>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=4 type="text" id="txtVMax" value="25"/></td>
+
+            <td><input style="color: #7FFF00; background-color: #333333;" size=4 type="text" id="txtDeltaV" value="4"/></td>
+            
+            <td><input style="color: #7FFF00; background-color: #333333;" size=4 type="text" id="txtPLeft" value="1.00"/></td>
+
+            <td><input style="color: #7FFF00; background-color: #333333;" size=4 type="text" id="txtPRight" value="1.00"/></td>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=4 type="text" id="txtRange" value="1-N"/></td>
+            <td><input style="color: #7FFF00; background-color: #333333;" size=4 type="text" id="txtIsLog" value="false"/></td>
+
+            <td><input type="button" id="addBehavior" value="Add" onclick="insRow() " style="color: #7FFF00; background-color: #333333;"/></td>
+            <td><input type="button" id="delBehavior" value="Del" onclick="deleteRow(this)" style="color: #7FFF00; background-color: #333333;"/></td>
+        </tr>
+	</table>
+</div>
+<canvas id="myCanvas" width="640" height="480" style="border:1px solid #000000;">
+</canvas> 
+    
+<script type="text/javascript">
+    
+/* Default button event */
+function onBtnDefault(){
+        
+    window.location.reload();
+}
+
+
+/* reset all form parameters */
+function reset(){
+     
+    document.getElementById("txtSTH").value = "03";
+    document.getElementById("txtSTM").value = "00";
+    document.getElementById("txtSTS").value = "00";
+
+    document.getElementById("txtDTH").value = "01";
+    document.getElementById("txtDTM").value = "00";
+    document.getElementById("txtDTS").value = "00";
+
+    document.getElementById("txtSTTH").value = "00";
+    document.getElementById("txtSTTM").value = "02";
+    document.getElementById("txtSTTS").value = "00";
+
+    document.getElementById("txtInitDensity-absolut").value = "15";
+    document.getElementById("txtDeltaDensity-absolut").value = "01";
+    document.getElementById("txtFinalDensity-absolut").value = "1425";
+    document.getElementById("txtFinalDensity-absolut").style="color: #7FFF00; background-color: #333333;"
+
+    document.getElementById("txtInitDensity-percent").value = "0.01";
+    document.getElementById("txtDeltaDensity-percent").value = "0.001";
+    document.getElementById("txtFinalDensity-percent").value = "0.95";
+
+    var myvar;
+    
+    myvar = document.getElementById("lstModels");
+    myvar.value = "T-UFRRJ";
+
+    myvar = document.getElementById("txtSpeedLimit");
+    myvar = "25";
+
+    myvar = document.getElementById("txtCellX");
+    myvar.value = "1500";
+
+    myvar = document.getElementById("txtCellY");
+    myvar.value = "1";
+
+    myvar = document.getElementById("txtCellSize");
+    myvar.value = "1.5";
+
+    myvar = document.getElementById("txtDefaultCellSize");
+    myvar.value = "7.5";
+    
+
+    myvar = document.getElementById("txtLogFileName");
+    myvar.value = "Default.log";
+
+    myvar = document.getElementById("txtSpaceTimeFileName");
+    myvar.value = "Default.bin";
+
+    myvar = document.getElementById("txtBehavior");
+    myvar.value = "unknown";
+
+    myvar = document.getElementById("txtBetaAacc");
+    myvar.value = "4";
+    
+    myvar = document.getElementById("txtBetaBacc");
+    myvar.value = "2";
+
+    myvar = document.getElementById("txtBetaAdst");
+    myvar.value = "4";
+    
+    myvar = document.getElementById("txtBetaBdst");
+    myvar.value = "2";
+
+    myvar = document.getElementById("txtHeadway");
+    myvar.value = "6";
+    
+    myvar = document.getElementById("txtSafeDist");
+    myvar.value + "3";
+    
+    myvar = document.getElementById("txtSize");
+    myvar.value = "5";
+    
+    myvar = document.getElementById("txtPercentOccu");
+    myvar.value = "1.00";
+    
+    myvar = document.getElementById("txtAbsoluteOcc");
+    myvar.value = "5";
+    
+
+    myvar = document.getElementById("txtVMax");
+    myvar.value = "25";
+
+    myvar = document.getElementById("txtDeltaV");
+    myvar.value = "4";
+
+    myvar = document.getElementById("txtPLeft");
+    myvar.value = "1.00";
+
+    myvar = document.getElementById("txtPRight");
+    myvar.value = "1.00";
+
+    myvar = document.getElementById("txtRange");
+    myvar.value = "1-N";
+
+    myvar = document.getElementById("txtIsLog");
+    myvar.value = "false";
+
+    
+         
+
+      
+
+}
+/* Verifying if all parameters are ok */
+function onBtnVerify() {
+    var occu = parseFloat( document.getElementById("txtFinalDensity-percent").value ); 
+    var space = parseFloat( document.getElementById("txtCellX").value );
+    
+    var minCell = parseFloat( document.getElementById("txtDefaultCellSize").value );
+    minCell /= parseFloat( document.getElementById("txtCellSize").value );
+    
+    occu *= space;
+    document.getElementById("txtFinalDensity-absolut").value = Math.floor(occu);
+    
+    occu = parseFloat( document.getElementById("txtDeltaDensity-percent").value ); 
+    occu *= space;
+    document.getElementById("txtDeltaDensity-absolut").value = Math.floor(occu);
+
+    occu = parseFloat( document.getElementById("txtInitDensity-percent").value ); 
+    occu *= space;
+    document.getElementById("txtInitDensity-absolut").value = Math.floor(occu);
+    
+    
+    //occu = parseFloat( document.getElementById("txtInitDensity-percent").value ); 
+    
+    
+    var behaviors = document.getElementById("tblBehaviors");
+    var lengthBehaviors = behaviors.rows.length;
+    var percentBehaviors = parseFloat(document.getElementById("txtPercentOccu").value);
+    var acc = percentBehaviors;
+   
+    
+    var myvar = document.getElementById("txtAbsoluteOcc");
+    myvar.value = Math.floor(percentBehaviors * occu) ;
+    if (myvar.value < minCell)
+        myvar.value = minCell;
+    //document.getElementById("txtOccuCell").valeu = "1234"; //Math.floor(percentBehaviors * occu);
+    
+    
+    for (var i = 2; i < lengthBehaviors; i++){
+        percentBehaviors = parseFloat(document.getElementById("txtPercentOccu-"+i).value);
+        myvar = document.getElementById("txtAbsoluteOcc-"+i)
+        myvar.value = Math.floor(percentBehaviors * occu) ;
+        if (myvar.value < minCell)
+            myvar.value = minCell;
+    
+        acc += percentBehaviors;
+    }
+    
+    if (acc > 1)
+        alert("Number of vehicles is greater than 100% of occupation!");
+
+}
+
+function fileParse(txt){
+    var substring = "\n";
+    var left = "";
+    var right = txt;
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    
+    var myvar;
+    
+    myvar = document.getElementById("lstModels");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+
+    myvar = document.getElementById("txtSpeedLimit");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+
+    myvar = document.getElementById("txtCellX");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtCellY");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtCellSize");
+    myvar.value = left;
+  
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+  
+    myvar = document.getElementById("txtDefaultCellSize");
+    myvar.value = left;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtLogFileName");
+    myvar.value = left;
+
+  
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtSpaceTimeFileName");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    
+    var total  = parseInt(left);
+    var seconds = total % 60;
+    total = (total - seconds) / 60;
+    var minutes = total % 60;
+    var hour = (total - minutes) / 60;
+    document.getElementById("txtSTH").value = hour;
+    document.getElementById("txtSTM").value = minutes;
+    document.getElementById("txtSTS").value = seconds;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    
+    total  = parseInt(left);
+    seconds = total % 60;
+    total = (total - seconds) / 60;
+    minutes = total % 60;
+    hour = (total - minutes) / 60;
+    document.getElementById("txtDTH").value = hour;
+    document.getElementById("txtDTM").value = minutes;
+    document.getElementById("txtDTS").value = seconds;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    
+    total  = parseInt(left);
+    seconds = total % 60;
+    total = (total - seconds) / 60;
+    minutes = total % 60;
+    hour = (total - minutes) / 60;
+    document.getElementById("txtSTTH").value = hour;
+    document.getElementById("txtSTTM").value = minutes;
+    document.getElementById("txtSTTS").value = seconds;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtInitDensity-percent");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtDeltaDensity-percent");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtFinalDensity-percent");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+
+
+    var nBehavior = parseInt(left);
+    
+    if (nBehavior > 2){
+        for (var i = 2; i < nBehavior; i++)
+            insRow();
+    }
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtBehavior");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtBetaAacc");
+    myvar.value = left;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtBetaBacc");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtBetaAdst");
+    myvar.value = left;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtBetaBdst");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtHeadway");
+    myvar.value = left;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+  
+    myvar = document.getElementById("txtSafeDist");
+    myvar.value = left;
+    
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtSize");
+    myvar.value = left;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtPercentOccu");
+    myvar.value = left;
+    
+    //left = right.substr(0, right.search(substring));
+    //right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    //myvar = document.getElementById("txtAbsoluteOcc");
+    //myvar.value = left;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtVMax");
+    myvar.value = left;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtDeltaV");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtPLeft");
+    myvar.value = left;
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtPRight");
+    myvar.value = left;
+    
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtRange");
+    myvar.value = left;
+
+
+    left = right.substr(0, right.search(substring));
+    right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+    myvar = document.getElementById("txtIsLog");
+    myvar.value = left;
+
+    for (var i = 2; i < nBehavior; i++){
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtBehavior"+i);
+        myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtBetaAacc-"+i);
+        myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtBetaBacc-"+i);
+        myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtBetaAdst-"+i);
+        myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtBetaBdst-"+i);
+        myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtHeadway-"+i);
+        myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+
+        myvar = document.getElementById("txtSafeDist-"+i);
+        myvar.value = left;
+
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtSize-"+i);
+        myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtPercentOccu-"+i);
+        myvar.value = left;
+
+        //left = right.substr(0, right.search(substring));
+        //right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        //myvar = document.getElementById("txtAbsoluteOcc");
+        //myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtVMax-"+i);
+        myvar.value = left;
+
+        
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtDeltaV-"+i);
+        myvar.value = left;
+        
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtPLeft-"+i);
+        myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtPRight-"+i);
+        myvar.value = left;
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtRange-"+i);
+        myvar.value = left;
+
+
+        left = right.substr(0, right.search(substring));
+        right = right.substr(right.search(substring)+1, right.length - (right.search(substring)));
+        myvar = document.getElementById("txtIsLog-"+i);
+        myvar.value = left;
+
+
+    }
+    
+    if (right == "THE END")
+        alert("File is read!");
+}
+    
+    
+/* Uploading config file */
+function onBtnUpload() {
+   // window.location.reload();
+    var myvar = document.getElementById("btnFile");
+    var reader = new FileReader();
+    var contents = "";
+     reader.onload = function (event) {
+        contents = event.target.result;
+        fileParse(contents);
+         
+     };
+
+    reader.readAsBinaryString(myvar.files[0]);
+    
+    
+   
+}
+/* Creating a config file to download */
+function onBtnDownload() {
+    var simulation = (3600 * parseInt(document.getElementById("txtSTH").value));
+        simulation += (60 *  parseInt(document.getElementById("txtSTM").value));
+        simulation +=  parseInt(document.getElementById("txtSTS").value);
+
+    var discard    = (3600 * parseInt(document.getElementById("txtDTH").value));
+        discard   += (60 *  parseInt(document.getElementById("txtDTM").value)) ;
+        discard   +=  parseInt(document.getElementById("txtDTS").value);
+
+    var statistic  = (3600 * parseInt(document.getElementById("txtSTTH").value));
+        statistic += (60 * parseInt(document.getElementById("txtSTTM").value));
+        statistic += parseInt(document.getElementById("txtSTTS").value);
+
+    var initV = parseInt(document.getElementById("txtInitDensity-absolut").value);
+    var DeltaV  = parseInt(document.getElementById("txtDeltaDensity-absolut").value);
+    var finalV = parseInt(document.getElementById("txtFinalDensity-absolut").value);
+
+    var myvar;
+    var st = "";
+
+    myvar = document.getElementById("lstModels");
+    st += myvar.value + "\n";
+
+    myvar = document.getElementById("txtSpeedLimit");
+    st += myvar.value + "\n";
+
+    myvar = document.getElementById("txtCellX");
+    st += myvar.value + "\n";
+
+    myvar = document.getElementById("txtCellY");
+    st += myvar.value + "\n";
+
+    myvar = document.getElementById("txtCellSize");
+    st += myvar.value + "\n";
+
+     myvar = document.getElementById("txtDefaultCellSize");
+     st += myvar.value + "\n";
+
+    myvar = document.getElementById("txtLogFileName");
+    st += myvar.value + "\n";
+
+    myvar = document.getElementById("txtSpaceTimeFileName");
+    st += myvar.value + "\n";
+
+    st += simulation + "\n";
+    st += discard + "\n";
+    st += statistic + "\n";
+    
+    myvar = document.getElementById("txtInitDensity-percent");
+    st += myvar.value + "\n";
+    
+    myvar = document.getElementById("txtDeltaDensity-percent");
+    st += myvar.value + "\n";
+    
+    myvar = document.getElementById("txtFinalDensity-percent");
+    st += myvar.value + "\n";
+
+    var x=document.getElementById("tblBehaviors");
+    st += x.rows.length + "\n";
+
+    myvar = document.getElementById("txtBehavior");
+    st += myvar.value + "\n";
+
+    myvar = document.getElementById("txtBetaAacc");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtBetaBacc");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtBetaAdst");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtBetaBdst");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtHeadway");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtSafeDist");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtSize");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtPercentOccu");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtVMax");
+    st += myvar.value + "\n";
+
+    myvar = document.getElementById("txtDeltaV");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtPLeft");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtPRight");
+    st += myvar.value + "\n";
+
+    myvar = document.getElementById("txtRange");
+    st += myvar.value + "\n";
+    myvar = document.getElementById("txtIsLog");
+    st += myvar.value + "\n";
+
+    for (var i = 2; i < x.rows.length; i++){
+
+        myvar = document.getElementById("txtBehavior"+i);
+        st += myvar.value + "\n";
+
+        myvar = document.getElementById("txtBetaAacc-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtBetaBacc-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtBetaAdst-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtBetaBdst-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtHeadway-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtSafeDist-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtSize-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtPercentOccu-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtVMax-"+i);
+        st += myvar.value + "\n";
+        
+        myvar = document.getElementById("txtDeltaV-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtPLeft-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtPRight-"+i);
+        st += myvar.value + "\n";
+        
+        myvar = document.getElementById("txtRange-"+i);
+        st += myvar.value + "\n";
+        myvar = document.getElementById("txtIsLog-"+i);
+        st += myvar.value + "\n";
+        
+         
+    }
+    
+    st += "THE END"
+    
+	var textToSave =  st;
+	var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+	var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+	var fileNameToSaveAs = "def.config";
+
+	var downloadLink = document.createElement("a");
+	downloadLink.download = fileNameToSaveAs;
+	downloadLink.innerHTML = "Download File";
+	downloadLink.href = textToSaveAsURL;
+	downloadLink.onclick = destroyClickedElement;
+	downloadLink.style.display = "none";
+	document.body.appendChild(downloadLink);
+
+	downloadLink.click();
+
+
+}
+    
+function destroyClickedElement(event) { document.body.removeChild(event.target); }
+
+/* Drawing the beta curve in according to selected behavior */
+function drawCurve(obj){
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d");
+	var str = obj.id;
+	var pos = str.indexOf("-");
+	var index = ""; //In this case, index is the substring. 	
+
+	if (pos != -1)
+		index = str.substr(pos, str.length - pos);
+
+	
+   var aAcc = document.getElementById("txtBetaAacc"+index).value;
+   var bAcc = document.getElementById("txtBetaBacc"+index).value;
+   var aDst = document.getElementById("txtBetaAdst"+index).value;
+   var bDst = document.getElementById("txtBetaBdst"+index).value;
+    
+
+	for (i = 0; i <= 640; i+=64){
+		ctx.beginPath(); 
+		ctx.strokeStyle = "#FFFF00";
+		ctx.moveTo(i, 0); 
+		ctx.lineTo(i, 480);
+		ctx.stroke();
+	}
+	
+	for (i = 0; i <= 480; i+=48){
+		ctx.beginPath(); 
+		ctx.strokeStyle = "#FFFF00";
+		ctx.moveTo(0, i); 
+		ctx.lineTo(640, i);
+		ctx.stroke();
+	}
+	
+	
+	
+	buildCurve(aAcc, bAcc, ctx, "#00FF00");
+	buildCurve(aDst, bDst, ctx, "#FF0000");
+	
+	
+}
+ 
+/* Gama function reduced in Factorial function */
+function gamaF (n){
+	var acc = n;	
+	if (n <= 1)
+		return 1;
+	
+	for ( i = n-1; i > 0; i--){
+		acc *= i;
+	}
+
+	return acc;
+}
+
+/* Calculeting a part of Beta function equation */
+function betaF (inParam, alpha, beta, x){
+	var xalpha = Math.pow(x, (alpha - 1));
+	var xbeta = Math.pow((1 - x), (beta-1));
+	var test = Math.pow(2, 2);
+	return inParam * xalpha * xbeta;
+}
+
+/* Plotting points on canvas in according to beta curve 
+ * Alpha and Beta are input parameters of PDF.
+ * ctx is a canvas context.
+ * Color is the point color */
+function buildCurve(alpha, beta, ctx, color){
+	var gamaAlpha = gamaF(alpha);
+   var gamaBeta  = gamaF(beta);
+   var alphabeta = parseInt(alpha) + parseInt(beta);
+   var gamaAlphaBeta = gamaF(alphabeta);
+   var inParam = gamaAlphaBeta / (gamaAlpha * gamaBeta);
+   var x = 0;
+   var y = 0;
+  	
+  	ctx.beginPath(); 
+	ctx.strokeStyle = color;
+	ctx.moveTo(0, 480); 
+	
+   while (x < 1){
+		y = betaF(inParam, alpha, beta, x);
+	
+		var xaux1 = x * 640;
+		var yaux1 = (y * 480) / 10;
+		
+		
+		ctx.lineTo(xaux1, 480 - parseFloat(yaux1) );
+		ctx.stroke();
+		
+		x = x + 0.001;   
+   }
+   
+   
+}
+/* Removing the last row of behavior table */
+function deleteRow(row){
+    var i=row.parentNode.parentNode.rowIndex;
+    document.getElementById('tblBehaviors').deleteRow(i);
+}
+/* Inserting new row on the behavior table */
+function insRow(){
+  
+    //console.log( 'hi');
+    var x=document.getElementById('tblBehaviors');
+    var new_row = x.rows[1].cloneNode(true);
+    var len = x.rows.length;
+  //  new_row.cells[0].innerHTML = len;
+   
+    var inp1 = new_row.cells[0].getElementsByTagName('input')[0];
+    inp1.id += len;
+    inp1.value += "-" + len;
+
+    console.log('Debug');
+    for (var i = 1; i <= 16; i++){
+        var inp = new_row.cells[i].getElementsByTagName('input')[0];
+        inp.id += "-" + len;
+        console.log(inp);
+        
+        
+    }
+    /*
+    var inp2 = new_row.cells[1].getElementsByTagName('input')[0];
+    inp2.id += "-" + len;
+    
+   
+    var inp3 = new_row.cells[2].getElementsByTagName('input')[0];
+    inp3.id += "-" + len;
+     
+
+    var inp4 = new_row.cells[3].getElementsByTagName('input')[0];
+    inp4.id += "-" + len;
+     
+   
+    var inp5 = new_row.cells[4].getElementsByTagName('input')[0];
+    inp5.id += "-" + len;
+     
+
+    var inp6 = new_row.cells[5].getElementsByTagName('input')[0];
+    inp6.id += "-" + len;
+    
+    var inp7 = new_row.cells[6].getElementsByTagName('input')[0];
+    inp7.id += "-" + len;
+     
+
+    var inp8 = new_row.cells[7].getElementsByTagName('input')[0];
+    inp8.id += "-" + len;
+
+    var inp9 = new_row.cells[8].getElementsByTagName('input')[0];
+    inp9.id += "-" + len;
+     
+    var inp10 = new_row.cells[9].getElementsByTagName('input')[0];
+    inp10.id += "-" + len;
+
+    var inp11 = new_row.cells[10].getElementsByTagName('input')[0];
+    inp11.id += "-" + len;
+
+    var inp12 = new_row.cells[11].getElementsByTagName('input')[0];
+    inp12.id += "-" + len;
+
+    var inp13 = new_row.cells[12].getElementsByTagName('input')[0];
+    inp13.id += "-" + len;
+
+    var inp14 = new_row.cells[13].getElementsByTagName('input')[0];
+    inp14.id += "-" + len;
+    
+    var inp15 = new_row.cells[14].getElementsByTagName('input')[0];
+    inp15.id += "-" + len;
+    */
+    
+    x.appendChild( new_row );
+   
+}
+    
+</script>
+</body>
+</html>

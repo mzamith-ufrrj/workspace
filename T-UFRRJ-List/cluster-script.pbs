@@ -1,0 +1,4 @@
+#!/bin/bash
+#PBS -o t-ufrrj-OpenMP.stdout.txt -e t-ufrrj-OpenMP.stderr.txt
+cd $PBS_O_WORKDIR
+./t-ufrrj-OpenMP ML-SYM-DEFAULT-MTHREAD.config

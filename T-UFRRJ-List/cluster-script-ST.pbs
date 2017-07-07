@@ -1,0 +1,5 @@
+#!/bin/bash
+#PBS -o t-ufrrj.stdout.txt -e t-ufrrj.stderr.txt
+#PBS -l nodes=1:ppn=1
+cd $PBS_O_WORKDIR
+./t-ufrrj ML-SYM-DEFAULT-STHREAD.config
